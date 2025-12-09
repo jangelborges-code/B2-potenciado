@@ -246,44 +246,44 @@
             <span>POTENCIADO</span>
         </div>
 
-        <!-- 1. Science Lab (Tracking) -->
+        <!-- 1. Tracking -> Seguimiento de progreso -->
         <div class="satellite-wrapper" style="--i:0" onclick="openModal(0)">
             <div class="satellite-body">
                 <i data-lucide="activity" size="32"></i>
             </div>
-            <div class="satellite-label">Science<br>Lab</div>
+            <div class="satellite-label">Seguimiento<br>de progreso</div>
         </div>
 
-        <!-- 2. Viral Loop (Referidos) -->
+        <!-- 2. Viral Loop -> Seguimiento de ventas -->
         <div class="satellite-wrapper" style="--i:1" onclick="openModal(1)">
             <div class="satellite-body">
-                <i data-lucide="users" size="32"></i>
+                <i data-lucide="trending-up" size="32"></i>
             </div>
-            <div class="satellite-label">Viral<br>Loop</div>
+            <div class="satellite-label">Seguimiento<br>de ventas</div>
         </div>
 
-        <!-- 3. Pocket Coach (Entrenar) -->
+        <!-- 3. Pocket Coach -> Servicios -->
         <div class="satellite-wrapper" style="--i:2" onclick="openModal(2)">
             <div class="satellite-body">
-                <i data-lucide="play-circle" size="32"></i>
+                <i data-lucide="dumbbell" size="32"></i>
             </div>
-            <div class="satellite-label">Pocket<br>Coach</div>
+            <div class="satellite-label">Servicios</div>
         </div>
 
-        <!-- 4. B2 Prime AI (IA Generativa) -->
+        <!-- 4. B2 IA Prime -> Tu versión prime -->
         <div class="satellite-wrapper" style="--i:3" onclick="openModal(3)">
             <div class="satellite-body">
                 <i data-lucide="sparkles" size="32"></i>
             </div>
-            <div class="satellite-label">B2 Prime<br>AI</div>
+            <div class="satellite-label">Tu versión<br>prime</div>
         </div>
 
-        <!-- 5. Staff Control (Main App/CRM) -->
+        <!-- 5. Staff Control -> Referidos -->
         <div class="satellite-wrapper" style="--i:4" onclick="openModal(4)">
             <div class="satellite-body">
-                <i data-lucide="bar-chart-2" size="32"></i>
+                <i data-lucide="users" size="32"></i>
             </div>
-            <div class="satellite-label">Staff<br>Control</div>
+            <div class="satellite-label">Referidos</div>
         </div>
 
     </div>
@@ -306,19 +306,19 @@
         // CONFIGURACIÓN DE ENLACES ACTIVOS
         // ------------------------------------------
         const apps = [
-            "https://b2-fitness-tracker-602932976216.us-west1.run.app/",       // 0: Science Lab
-            "https://b2-gym-store-referral-602932976216.us-west1.run.app/",     // 1: Viral Loop
-            "https://b2-gym-entrenar-602932976216.us-west1.run.app/",           // 2: Pocket Coach
-            "https://b2-prime-fitness-intelligence-602932976216.us-west1.run.app/", // 3: B2 Prime AI
-            "https://gimnasio-b2-602932976216.us-west1.run.app/"                // 4: Staff Control
+            "https://b2-fitness-tracker-602932976216.us-west1.run.app/",       // 0: Seguimiento de progreso
+            "https://b2-gym-store-referral-602932976216.us-west1.run.app/",     // 1: Seguimiento de ventas
+            "https://b2-gym-entrenar-602932976216.us-west1.run.app/",           // 2: Servicios
+            "https://b2-prime-fitness-intelligence-602932976216.us-west1.run.app/", // 3: Tu versión prime
+            "https://gimnasio-b2-602932976216.us-west1.run.app/"                // 4: Referidos
         ];
         
         const names = [
-            "Science Lab (Tracking)", 
-            "Viral Loop (Referidos)", 
-            "Pocket Coach (Training)", 
-            "B2 Prime (IA Generativa)", 
-            "Staff Control (Dashboard)"
+            "Seguimiento de Progreso", 
+            "Seguimiento de Ventas", 
+            "Servicios", 
+            "Tu Versión Prime", 
+            "Referidos"
         ];
 
         const modal = document.getElementById('demoModal');
