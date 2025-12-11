@@ -28,14 +28,80 @@
             color: var(--text-white);
             font-family: 'Plus Jakarta Sans', sans-serif;
             height: 100vh;
-            overflow: hidden; /* Evita scroll en desktop */
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             background-image: radial-gradient(circle at center, rgba(255, 133, 10, 0.08) 0%, #000 70%);
         }
 
-        /* --- CONTENEDOR DE ÓRBITA --- */
+        /* --- PANTALLA DE LOGIN (NUEVO) --- */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-dark);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .login-card {
+            text-align: center;
+            padding: 40px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 133, 10, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .login-card p {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .btn-access {
+            background-color: var(--accent-b2);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 133, 10, 0.3);
+            text-transform: uppercase;
+        }
+
+        .btn-access:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 133, 10, 0.5);
+        }
+
+        /* --- CONTENEDOR DE ÓRBITA (OCULTO AL INICIO) --- */
+        #main-interface {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            display: none; /* Se activa vía JS */
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
         .orbit-system {
             position: relative;
             width: 800px;
@@ -84,12 +150,11 @@
             font-weight: 600;
         }
 
-        /* --- SATÉLITES (LOS BOTONES) --- */
+        /* --- SATÉLITES --- */
         .satellite-wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
-            /* Lógica matemática para posicionar en círculo */
             transform: 
                 translate(-50%, -50%) 
                 rotate(calc(var(--i) * 72deg)) 
@@ -104,7 +169,6 @@
             z-index: 20;
         }
 
-        /* El contenedor del icono que anima el "Bounce" */
         .satellite-body {
             width: 80px;
             height: 80px;
@@ -118,8 +182,6 @@
             box-shadow: 0 0 15px rgba(255, 133, 10, 0.1);
             transition: all 0.3s ease;
             color: var(--accent-b2);
-            
-            /* Animación de flotación desfasada por índice */
             animation: float 4s ease-in-out infinite;
             animation-delay: calc(var(--i) * 0.5s);
         }
@@ -154,7 +216,7 @@
         
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); } /* El Bounce */
+            50% { transform: translateY(-15px); } 
         }
 
         @keyframes pulse-core {
@@ -162,7 +224,7 @@
             50% { transform: scale(1.02); opacity: 0.8; }
         }
 
-        /* --- MODAL (POP UP) --- */
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -206,9 +268,19 @@
 
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- RESPONSIVE (MÓVIL) --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            body { overflow-y: auto; height: auto; padding: 40px 0; }
+            body { overflow-y: auto; height: auto; padding: 0; }
+            
+            /* Ajuste para que el login ocupe toda la pantalla en móvil */
+            #login-screen { position: fixed; }
+            
+            #main-interface { 
+                height: auto; 
+                padding: 40px 0; 
+                align-items: flex-start;
+            }
+
             .orbit-system { 
                 width: 100%; height: auto; 
                 flex-direction: column; 
@@ -218,9 +290,9 @@
             .core { position: relative; margin-bottom: 40px; }
             .satellite-wrapper {
                 position: relative;
-                transform: none !important; /* Desactiva la rueda matemática */
+                transform: none !important;
                 top: auto; left: auto;
-                flex-direction: row; /* Icono a la izquierda */
+                flex-direction: row;
                 width: 90%;
                 background: rgba(255,255,255,0.05);
                 padding: 15px;
@@ -234,61 +306,54 @@
 </head>
 <body>
 
-    <div class="orbit-system">
-        
-        <!-- ANILLOS DE FONDO -->
-        <div class="ring ring-1"></div>
-        <div class="ring ring-2"></div>
-
-        <!-- NÚCLEO CENTRAL -->
-        <div class="core">
-            <h1>B2<br><span style="color:#fff; font-size: 0.5em;"></h1>
-            <span>POTENCIADO</span>
+    <!-- 1. PANTALLA DE ACCESO -->
+    <div id="login-screen">
+        <div class="login-card">
+            <i data-lucide="lock" color="#ff850a" size="48" style="margin-bottom: 20px;"></i>
+            <h2>Acceso Privado</h2>
+            <p>Pida la contraseña a Angel por Whatsapp</p>
+            <button class="btn-access" onclick="attemptLogin()">VER B2 POTENCIADO</button>
         </div>
-
-        <!-- 1. Tracking -> Seguimiento de progreso -->
-        <div class="satellite-wrapper" style="--i:0" onclick="openModal(0)">
-            <div class="satellite-body">
-                <i data-lucide="activity" size="32"></i>
-            </div>
-            <div class="satellite-label">Seguimiento<br>de progreso</div>
-        </div>
-
-        <!-- 2. Viral Loop -> Seguimiento de ventas -->
-        <div class="satellite-wrapper" style="--i:1" onclick="openModal(1)">
-            <div class="satellite-body">
-                <i data-lucide="trending-up" size="32"></i>
-            </div>
-            <div class="satellite-label">Seguimiento<br>de ventas</div>
-        </div>
-
-        <!-- 3. Pocket Coach -> Servicios -->
-        <div class="satellite-wrapper" style="--i:2" onclick="openModal(2)">
-            <div class="satellite-body">
-                <i data-lucide="dumbbell" size="32"></i>
-            </div>
-            <div class="satellite-label">Servicios</div>
-        </div>
-
-        <!-- 4. B2 IA Prime -> Tu versión prime -->
-        <div class="satellite-wrapper" style="--i:3" onclick="openModal(3)">
-            <div class="satellite-body">
-                <i data-lucide="sparkles" size="32"></i>
-            </div>
-            <div class="satellite-label">Tu versión<br>prime</div>
-        </div>
-
-        <!-- 5. Staff Control -> Referidos -->
-        <div class="satellite-wrapper" style="--i:4" onclick="openModal(4)">
-            <div class="satellite-body">
-                <i data-lucide="users" size="32"></i>
-            </div>
-            <div class="satellite-label">Referidos</div>
-        </div>
-
     </div>
 
-    <!-- MODAL POPUP -->
+    <!-- 2. INTERFAZ PRINCIPAL (OCULTA) -->
+    <div id="main-interface" style="display: none;">
+        <div class="orbit-system">
+            
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+
+            <div class="core">
+                <h1>B2<br><span style="color:#fff; font-size: 0.5em;"></h1>
+                <span>POTENCIADO</span>
+            </div>
+
+            <!-- Botones -->
+            <div class="satellite-wrapper" style="--i:0" onclick="openModal(0)">
+                <div class="satellite-body"><i data-lucide="activity" size="32"></i></div>
+                <div class="satellite-label">Science<br>Lab</div>
+            </div>
+            <div class="satellite-wrapper" style="--i:1" onclick="openModal(1)">
+                <div class="satellite-body"><i data-lucide="users" size="32"></i></div>
+                <div class="satellite-label">Viral<br>Loop</div>
+            </div>
+            <div class="satellite-wrapper" style="--i:2" onclick="openModal(2)">
+                <div class="satellite-body"><i data-lucide="play-circle" size="32"></i></div>
+                <div class="satellite-label">Pocket<br>Coach</div>
+            </div>
+            <div class="satellite-wrapper" style="--i:3" onclick="openModal(3)">
+                <div class="satellite-body"><i data-lucide="sparkles" size="32"></i></div>
+                <div class="satellite-label">B2 Prime<br>AI</div>
+            </div>
+            <div class="satellite-wrapper" style="--i:4" onclick="openModal(4)">
+                <div class="satellite-body"><i data-lucide="bar-chart-2" size="32"></i></div>
+                <div class="satellite-label">Staff<br>Control</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL -->
     <div class="modal-overlay" id="demoModal">
         <div class="modal-window">
             <div class="modal-header">
@@ -302,23 +367,44 @@
     <script>
         lucide.createIcons();
 
-        // ------------------------------------------
-        // CONFIGURACIÓN DE ENLACES ACTIVOS
-        // ------------------------------------------
+        // --- LÓGICA DE LOGIN ---
+        function attemptLogin() {
+            const password = prompt("Ingrese la contraseña de acceso:");
+            
+            if (password === "B2propuesta") {
+                // Efecto de transición
+                const loginScreen = document.getElementById('login-screen');
+                const mainInterface = document.getElementById('main-interface');
+                
+                loginScreen.style.opacity = '0';
+                
+                // Esperar a que termine la animación de opacidad para ocultar el login
+                setTimeout(() => {
+                    loginScreen.style.display = 'none';
+                    mainInterface.style.display = 'flex'; // En Desktop es flex
+                    // Pequeño hack para forzar el reflow y que la animación de opacidad funcione
+                    setTimeout(() => mainInterface.style.opacity = '1', 50);
+                }, 800);
+            } else {
+                alert("Contraseña incorrecta. Intente nuevamente.");
+            }
+        }
+
+        // --- LÓGICA DE APPS ---
         const apps = [
-            "https://b2-fitness-tracker-602932976216.us-west1.run.app/",       // 0: Seguimiento de progreso
-            "https://b2-gym-store-referral-602932976216.us-west1.run.app/",     // 1: Seguimiento de ventas
-            "https://b2-gym-entrenar-602932976216.us-west1.run.app/",           // 2: Servicios
-            "https://b2-prime-fitness-intelligence-602932976216.us-west1.run.app/", // 3: Tu versión prime
-            "https://gimnasio-b2-602932976216.us-west1.run.app/"                // 4: Referidos
+            "https://b2-fitness-tracker-602932976216.us-west1.run.app/",
+            "https://b2-gym-store-referral-602932976216.us-west1.run.app/",
+            "https://b2-gym-entrenar-602932976216.us-west1.run.app/",
+            "https://b2-prime-fitness-intelligence-602932976216.us-west1.run.app/",
+            "https://gimnasio-b2-602932976216.us-west1.run.app/"
         ];
         
         const names = [
-            "Seguimiento de Progreso", 
-            "Seguimiento de Ventas", 
-            "Servicios", 
-            "Tu Versión Prime", 
-            "Referidos"
+            "Science Lab (Tracking)", 
+            "Viral Loop (Referidos)", 
+            "Pocket Coach (Training)", 
+            "B2 Prime (IA Generativa)", 
+            "Staff Control (Dashboard)"
         ];
 
         const modal = document.getElementById('demoModal');
@@ -326,10 +412,6 @@
         const title = document.getElementById('modalTitle');
 
         function openModal(index) {
-            if(!apps[index]) {
-                alert("Cargando módulo..."); 
-                return;
-            }
             title.innerText = "Experiencia: " + names[index];
             frame.src = apps[index];
             modal.style.display = 'flex';
@@ -340,7 +422,7 @@
             modal.style.opacity = '0';
             setTimeout(() => {
                 modal.style.display = 'none';
-                frame.src = ''; // Limpiar iframe para detener videos/procesos
+                frame.src = ''; 
             }, 300);
         }
     </script>
