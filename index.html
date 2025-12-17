@@ -127,7 +127,7 @@
             border: 1px solid rgba(255, 133, 10, 0.08); 
         }
 
-        /* --- NÚCLEO CENTRAL (Igual a la imagen) --- */
+        /* --- NÚCLEO CENTRAL --- */
         .core {
             position: absolute;
             text-align: center;
@@ -138,7 +138,6 @@
             align-items: center;
             width: 200px;
             height: 200px;
-            /* Efecto de brillo central */
             background: radial-gradient(circle, rgba(255,133,10,0.1) 0%, rgba(0,0,0,0) 60%);
             animation: pulse-core 4s infinite ease-in-out;
         }
@@ -170,8 +169,8 @@
             top: 50%;
             left: 50%;
             /* 
-               Radio de órbita: translateY(-280px)
                Distribución: 72 grados por item (360/5)
+               Radio: -280px del centro
             */
             transform: 
                 translate(-50%, -50%) 
@@ -190,7 +189,7 @@
         .satellite-body {
             width: 70px;
             height: 70px;
-            background: #000; /* Fondo negro sólido para contraste */
+            background: #000;
             border: 1px solid var(--accent-b2);
             border-radius: 50%;
             display: flex;
@@ -200,7 +199,6 @@
             box-shadow: 0 0 15px rgba(255, 133, 10, 0.1);
             transition: all 0.3s ease;
             color: var(--accent-b2);
-            /* Animación flotante desfasada */
             animation: float 4s ease-in-out infinite;
             animation-delay: calc(var(--i) * 0.8s);
         }
@@ -217,10 +215,10 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
-            color: #fff;
+            color: rgba(255,255,255,0.8);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            background: #000; /* Caja negra como en la imagen */
+            background: #000; 
             padding: 4px 6px;
             border-radius: 4px;
             line-height: 1.2;
@@ -229,6 +227,7 @@
 
         .satellite-wrapper:hover .satellite-label {
             color: var(--accent-b2);
+            color: #fff;
         }
 
         /* --- ANIMACIONES --- */
@@ -335,11 +334,11 @@
         </div>
     </div>
 
-    <!-- 2. INTERFAZ PRINCIPAL (Hub Circular) -->
+    <!-- 2. INTERFAZ PRINCIPAL -->
     <div id="main-interface">
         <div class="orbit-system">
             
-            <!-- Anillos decorativos de fondo -->
+            <!-- Anillos de fondo -->
             <div class="ring ring-1"></div>
             <div class="ring ring-2"></div>
 
@@ -350,42 +349,37 @@
             </div>
 
             <!-- 
-               ORDEN DE LOS BOTONES (Según la imagen):
-               0: Arriba (Science Lab) - 0 grados
-               1: Derecha (Viral Loop) - 72 grados
-               2: Abajo Derecha (Pocket Coach) - 144 grados
-               3: Abajo Izquierda (B2 Prime AI) - 216 grados
-               4: Izquierda (Staff Control) - 288 grados
+                ITEMS (Estructura de la imagen pero con textos en ESPAÑOL del primer código)
             -->
 
-            <!-- ITEM 0: ARRIBA -->
+            <!-- ITEM 0: Arriba -->
             <div class="satellite-wrapper" style="--i:0" onclick="openModal(0)">
                 <div class="satellite-body"><i data-lucide="activity" size="32"></i></div>
-                <div class="satellite-label">SCIENCE<br>LAB</div>
+                <div class="satellite-label">Seguimiento<br>de<br>progreso</div>
             </div>
 
-            <!-- ITEM 1: DERECHA (Superior) -->
+            <!-- ITEM 1: Derecha Superior -->
             <div class="satellite-wrapper" style="--i:1" onclick="openModal(1)">
                 <div class="satellite-body"><i data-lucide="users" size="32"></i></div>
-                <div class="satellite-label">VIRAL<br>LOOP</div>
+                <div class="satellite-label">Seguimiento<br>de<br>ventas</div>
             </div>
 
-            <!-- ITEM 2: DERECHA (Inferior) -->
+            <!-- ITEM 2: Derecha Inferior -->
             <div class="satellite-wrapper" style="--i:2" onclick="openModal(2)">
                 <div class="satellite-body"><i data-lucide="play-circle" size="32"></i></div>
-                <div class="satellite-label">POCKET<br>COACH</div>
+                <div class="satellite-label">Servicios</div>
             </div>
 
-            <!-- ITEM 3: IZQUIERDA (Inferior) -->
+            <!-- ITEM 3: Izquierda Inferior -->
             <div class="satellite-wrapper" style="--i:3" onclick="openModal(3)">
                 <div class="satellite-body"><i data-lucide="sparkles" size="32"></i></div>
-                <div class="satellite-label">B2 PRIME<br>AI</div>
+                <div class="satellite-label">Tu<br>versión<br>prime</div>
             </div>
 
-            <!-- ITEM 4: IZQUIERDA (Superior) -->
+            <!-- ITEM 4: Izquierda Superior -->
             <div class="satellite-wrapper" style="--i:4" onclick="openModal(4)">
                 <div class="satellite-body"><i data-lucide="bar-chart-2" size="32"></i></div>
-                <div class="satellite-label">STAFF<br>CONTROL</div>
+                <div class="satellite-label">Referidos</div>
             </div>
 
         </div>
@@ -425,23 +419,22 @@
             }
         }
 
-        // --- LÓGICA DE APPS (Orden actualizado para coincidir con HTML) ---
-        // 0: Science Lab, 1: Viral Loop, 2: Pocket Coach, 3: B2 Prime, 4: Staff Control
-        
+        // --- APPS Y NOMBRES (Originales) ---
         const apps = [
-            "https://b2-fitness-tracker-602932976216.us-west1.run.app/",      // 0: Science Lab
-            "https://b2-gym-store-referral-602932976216.us-west1.run.app/",    // 1: Viral Loop
-            "https://b2-gym-entrenar-602932976216.us-west1.run.app/",           // 2: Pocket Coach
-            "https://b2-prime-fitness-intelligence-602932976216.us-west1.run.app/", // 3: B2 Prime
-            "https://gimnasio-b2-602932976216.us-west1.run.app/"                // 4: Staff Control
+            "https://b2-fitness-tracker-602932976216.us-west1.run.app/",
+            "https://b2-gym-store-referral-602932976216.us-west1.run.app/",
+            "https://b2-gym-entrenar-602932976216.us-west1.run.app/",
+            "https://b2-prime-fitness-intelligence-602932976216.us-west1.run.app/",
+            "https://gimnasio-b2-602932976216.us-west1.run.app/"
         ];
         
+        // Conservo estos nombres para el título del Modal, como estaba en tu código original
         const names = [
-            "SCIENCE LAB", 
-            "VIRAL LOOP", 
-            "POCKET COACH", 
-            "B2 PRIME AI", 
-            "STAFF CONTROL"
+            "Science Lab (Tracking)", 
+            "Viral Loop (Referidos)", 
+            "Pocket Coach (Training)", 
+            "B2 Prime (IA Generativa)", 
+            "Staff Control (Dashboard)"
         ];
 
         const modal = document.getElementById('demoModal');
@@ -449,7 +442,7 @@
         const title = document.getElementById('modalTitle');
 
         function openModal(index) {
-            title.innerText = "Módulo: " + names[index];
+            title.innerText = "Experiencia: " + names[index];
             frame.src = apps[index];
             modal.style.display = 'flex';
             setTimeout(() => modal.style.opacity = '1', 10);
